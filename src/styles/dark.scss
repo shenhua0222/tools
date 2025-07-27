@@ -1,0 +1,68 @@
+/* 覆盖你需要的变量 */
+@forward "element-plus/theme-chalk/src/dark/var.scss" with (
+    $colors: (
+        "white": #ffffff,
+        "black": #000000,
+        "primary": (
+            "base": #409EFF,
+        ),
+        "success": (
+            "base": #249B64,
+        ),
+        "warning": (
+            "base": #E6A23C,
+        ),
+        "danger": (
+            "base": #F48771,
+        ),
+        "error": (
+            "base": #F48771,
+        ),
+        "info": (
+            "base": #859896,
+        ),
+    ),
+    $text-color: (
+        "": #F3F3F3,
+        "primary": #F3F3F3,
+        "regular": #F3F3F3,
+        "light": #ffffff,
+        "secondary": #E3E3E3,
+        "placeholder": #E3E3E3,
+        "disabled": #727A7E,
+        "thirdly": #AAAAAA,
+    ),
+    $border-color: (
+        "": #525968,
+        "light": #414b64,
+        "lighter": #414b64,
+        "extra-light": #414b64,
+        "dark": #374055,
+        "darker": #374055,
+        "gap": #2E3A4A,
+    ),
+    $fill-color: (
+        "": #414b64,
+        "light": #424656,
+        "lighter": #626875,
+        "extra-light": #626875,
+        "dark": #333a4c,
+        "darker": #293040,
+        "blank": "transparent",
+    ),
+    $bg-color: (
+        "": #202630,
+        "lv-1": #1C232C,
+        "lv-2": #303540,
+        "lv-3": #373B46,
+        "selector": #434343,
+        "page": #1f1f1f,
+        "overlay": #202630,
+    )
+);
+@use 'element-plus/theme-chalk/src/dark/css-vars.scss';
+@use "./mixin.scss" as *;
+// 暗色主题
+html.dark {
+    @include darkTypes();
+}

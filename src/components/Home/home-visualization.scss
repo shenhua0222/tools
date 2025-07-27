@@ -1,0 +1,1195 @@
+$transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+$hover-lift: -6px;
+$brightness-normal: 1;
+$brightness-hover: 1.25;
+$scale-factor: var(--scale-factor, 1);
+
+$platform-width: 1080px;
+$platform-center-x: 600px;
+$platform-center-y: 450px;
+
+$breakpoint-xs: 480px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 1024px;
+$breakpoint-lg: 1200px;
+$breakpoint-xl: 1400px;
+$breakpoint-largeTablet: 1800px;
+$breakpoint-xxl: 1920px;
+$breakpoint-tv: 2560px;
+
+@mixin full-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin center-transform {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: top left;
+}
+
+@mixin svg-container {
+  :deep(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@mixin positioned-component($left, $top, $width: null, $height: null) {
+  position: absolute;
+  left: $left;
+  top: $top;
+
+  @if $width {
+    width: $width;
+  }
+
+  @if $height {
+    height: $height;
+  }
+
+  @include svg-container;
+}
+
+@mixin responsive-scale($scale-factor) {
+  transform: scale($scale-factor);
+  transform-origin: center center;
+}
+
+@mixin responsive-font($base-size, $scale-mobile: 0.8, $scale-tablet: 0.9) {
+  font-size: $base-size;
+
+  @media (max-width: $breakpoint-sm) {
+    font-size: $base-size * $scale-mobile;
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    font-size: $base-size * $scale-mobile * 0.9;
+  }
+}
+
+.home-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  @media (max-width: $breakpoint-sm) {
+    position: relative;
+    min-height: calc(100vh - 48px); // 扣除顶部栏高度
+  }
+}
+
+%debug-draggable-base {
+  cursor: move;
+  outline: 2px dashed rgba(0, 229, 255, 0.5);
+  outline-offset: 4px;
+
+  &.js-hover:not(.debug-dragging) {
+    outline-color: rgba(0, 229, 255, 0.8);
+    outline-width: 3px;
+  }
+
+  &.debug-dragging {
+    outline: 3px solid #ff4757;
+    outline-offset: 8px;
+    z-index: 9999 !important;
+  }
+}
+
+.debug-dragging * {
+  user-select: none !important;
+  pointer-events: none !important;
+}
+
+.debug-dragging {
+  user-select: none !important;
+  cursor: move !important;
+}
+
+.debug-label,
+.component-debug-label {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: #00e5ff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1000;
+
+  small {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 9px;
+  }
+}
+
+.debug-label {
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.component-debug-label {
+  top: -80px;
+  right: 0;
+  background: rgba(255, 71, 87, 0.9);
+  color: white;
+  z-index: 1001;
+
+  small {
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  min-height: inherit;
+  max-height: 100%;
+  max-width: 100%;
+
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+
+  @media (max-width: $breakpoint-xl) {
+    .platform-wrapper {
+      transform: scale(0.95) translate(-50%, -50%);
+    }
+  }
+
+  @media (max-width: $breakpoint-lg) {
+    .platform-wrapper {
+      transform: scale(0.85) translate(-50%, -50%);
+    }
+
+    .edge-platform,
+    .simulation-platform,
+    .data-manage-platform,
+    .parent-system {
+      opacity: 0.9;
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    .platform-wrapper {
+      transform: scale(0.7) translate(-50%, -50%);
+    }
+
+    .operator {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    position: relative;
+    min-height: calc(100vh - 48px); // 扣除顶部栏高度
+
+    .platform-wrapper {
+      transform: scale(0.6) translate(-50%, -40%);
+      transform-origin: center top;
+    }
+
+    .edge-platform,
+    .simulation-platform,
+    .data-manage-platform,
+    .parent-system {
+      opacity: 0.7;
+    }
+
+    .operator {
+      display: none;
+    }
+
+    .platform-title {
+      @include responsive-font(1.2rem, 0.8);
+    }
+
+    .peripheral-title {
+      @include responsive-font(12px, 0.8);
+    }
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    .platform-wrapper {
+      transform: scale(0.5) translate(-50%, -30%);
+    }
+
+    .business-module {
+      opacity: 0.9;
+    }
+
+    .edge-platform,
+    .simulation-platform,
+    .data-manage-platform,
+    .parent-system {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .animated-beam {
+      display: none;
+    }
+  }
+}
+
+.platform-wrapper {
+  @include center-transform;
+
+  transition: transform 0.3s ease-out;
+
+  @media (min-width: $breakpoint-xxl) {
+    transform: translate(-50%, -50%);
+  }
+
+  @media (max-width: $breakpoint-xl) and (min-width: $breakpoint-lg) {
+    transform: scale(0.95) translate(-52.6%, -52.6%);
+  }
+
+  @media (max-width: $breakpoint-lg) and (min-width: $breakpoint-md) {
+    transform: scale(0.85) translate(-58.8%, -58.8%);
+  }
+
+  @media (max-width: $breakpoint-md) and (min-width: $breakpoint-sm) {
+    transform: scale(0.7) translate(-71.4%, -71.4%);
+  }
+
+  @media (max-width: $breakpoint-sm) and (min-width: $breakpoint-xs) {
+    transform: scale(0.6) translate(-83.3%, -66.7%);
+    transform-origin: center top;
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    transform: scale(0.5) translate(-100%, -60%);
+    transform-origin: center top;
+  }
+
+  will-change: transform;
+  backface-visibility: hidden;
+
+  * {
+    transform-style: preserve-3d;
+  }
+}
+
+.platform-base-container,
+.platform-title,
+.business-module,
+.edge-platform,
+.simulation-platform,
+.data-manage-platform,
+.parent-system {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-origin: center center;
+
+  @media (max-width: $breakpoint-lg) {
+    filter: brightness(1.1);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    transition: all 0.2s ease;
+  }
+}
+
+.business-module {
+  transition: filter 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    filter: brightness(1.2) drop-shadow(0 8px 16px rgba(0, 229, 255, 0.4));
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    &:hover {
+      filter: none;
+      transform: none;
+    }
+  }
+}
+
+.peripheral-system {
+  transition: filter 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    filter: brightness(1.2) drop-shadow(0 8px 16px rgba(0, 229, 255, 0.4));
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    &:hover {
+      filter: none;
+      transform: none;
+    }
+  }
+}
+
+.stage.animation-playing {
+  pointer-events: none;
+
+  .platform-base-container,
+  .business-module,
+  .peripheral-system {
+    pointer-events: none;
+  }
+}
+
+.gsap-animation {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.bg {
+  position: fixed;
+  top: 0;
+  left: -1px;
+  width: 100%; // 改为100%，适应父容器
+  height: 100%; // 改为100%，适应父容器
+  z-index: -1;
+
+  // JPG 背景图片样式
+  display: block;
+  object-fit: cover;
+  object-position: center;
+
+  @media (max-width: $breakpoint-sm) {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 2dppx) {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+.platform-base-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--platform-platform-base-width, $platform-width);
+  transform: translate(var(--platform-platform-base-offset-x, 0px),
+      var(--platform-platform-base-offset-y, 0px));
+  perspective: 800px;
+
+  .platform-title {
+    position: absolute;
+    top: 63.5%;
+    left: 20%;
+    transform: translate(0, 0) skew(-3deg, 31deg);
+    transform-origin: center bottom;
+    z-index: 10;
+    margin: 0;
+    font-weight: 700;
+    background: linear-gradient(135deg, #00e5ff 0%, #0091ea 50%, #1976d2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: titleGlow-c458c6a6 3s ease-in-out infinite alternate;
+
+    @include responsive-font(1.5rem, 0.8);
+
+    @media (max-width: $breakpoint-lg) {
+      @include responsive-font(1.3rem, 0.8);
+      letter-spacing: 1.5px;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      @include responsive-font(1.1rem, 0.8);
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      @include responsive-font(1rem, 0.8);
+      letter-spacing: 0.5px;
+      top: 60%;
+    }
+
+    @media (max-width: $breakpoint-xs) {
+      @include responsive-font(0.9rem, 0.8);
+      letter-spacing: 0.2px;
+      top: 58%;
+    }
+  }
+
+  .platform-base {
+    position: relative;
+    display: block;
+    width: 100%;
+    @include svg-container;
+  }
+
+  &:not(.debug-draggable) {
+    transition: $transition-smooth;
+    filter: brightness($brightness-normal);
+
+    &:hover {
+      transform: translate(var(--platform-platform-base-offset-x, 0px),
+          var(--platform-platform-base-offset-y, 0px)) translateY($hover-lift);
+      filter: brightness($brightness-hover);
+      transition: $transition-bounce;
+    }
+  }
+
+  &.debug-draggable {
+    @extend %debug-draggable-base;
+    transition: $transition-smooth;
+    filter: brightness($brightness-normal);
+
+    &.js-hover:not(.debug-dragging) {
+      filter: brightness($brightness-hover);
+      box-shadow: 0 8px 25px rgba(0, 229, 255, 0.2);
+    }
+
+    &.debug-dragging {
+      filter: brightness(1.5);
+      transform: translate(var(--platform-platform-base-offset-x, 0px),
+          var(--platform-platform-base-offset-y, 0px)) translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(255, 71, 87, 0.3);
+    }
+  }
+}
+
+@keyframes titleGlow {
+  0% {
+    text-shadow:
+      0 4px 15px rgba(0, 229, 255, 0.3),
+      0 0 20px rgba(0, 229, 255, 0.2);
+  }
+
+  100% {
+    text-shadow:
+      0 4px 25px rgba(0, 229, 255, 0.6),
+      0 0 35px rgba(0, 229, 255, 0.4),
+      0 0 50px rgba(0, 145, 234, 0.3);
+  }
+}
+
+.algo {
+  &-repo {
+    @include positioned-component(800px, 160px);
+  }
+}
+
+.edge-platform,
+.simulation-platform,
+.data-manage-platform,
+.parent-system {
+  position: absolute;
+
+  .outer-base {
+    position: relative;
+    transition: $transition-smooth;
+    @include svg-container;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+  }
+
+  .peripheral-title {
+    position: absolute;
+    top: 55%;
+    left: 27%;
+    transform: translate(-50%, -50%) skew(-5deg, 30deg);
+    z-index: 2;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 4px 10px rgba(0, 229, 255, 0.3);
+    pointer-events: auto;
+    cursor: pointer;
+    transition: $transition-smooth;
+    user-select: none;
+
+    @include responsive-font(15px, 0.8);
+
+    @media (max-width: $breakpoint-lg) {
+      @include responsive-font(13px, 0.8);
+    }
+
+    @media (max-width: $breakpoint-md) {
+      @include responsive-font(11px, 0.8);
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      @include responsive-font(10px, 0.8);
+      pointer-events: none;
+    }
+
+    @media (min-width: $breakpoint-sm) {
+      &:active {
+        transform: translate(-50%, -50%) skew(-5deg, 30deg) scale(0.95);
+        transition: all 0.1s ease;
+      }
+    }
+  }
+
+  .peripheral-component {
+    position: absolute;
+    transition: $transition-bounce;
+    @include svg-container;
+    z-index: 1;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
+  }
+
+  &.js-hover:not(.debug-draggable),
+  &:hover:not(.debug-draggable) {
+    .outer-base {
+      filter: brightness(1.3) drop-shadow(0 8px 16px rgba(0, 229, 255, 0.3));
+      transform: translateY(-4px);
+    }
+
+    .peripheral-component {
+      transform: translateY(-6px) scale(1.05);
+      filter: brightness(1.2) drop-shadow(0 4px 12px rgba(0, 229, 255, 0.4));
+    }
+
+    .peripheral-title {
+      color: #00e5ff;
+      text-shadow: 0 4px 15px rgba(0, 229, 255, 0.6);
+      transform: translate(-50%, -50%) translateY(-4px) skew(-5deg, 30deg) scale(1.1);
+      filter: brightness(1.3);
+    }
+  }
+
+  &.debug-draggable {
+    @extend %debug-draggable-base;
+
+    &.debug-dragging {
+      .outer-base {
+        filter: brightness(1.5) drop-shadow(0 12px 24px rgba(255, 71, 87, 0.4));
+        transform: translateY(-8px) scale(1.1);
+      }
+    }
+  }
+}
+
+@each $module in (edge-platform, simulation-platform, data-manage-platform, parent-system) {
+  .#{$module} {
+    left: calc(600px + var(--#{$module}-offset-x));
+    top: calc(450px + var(--#{$module}-offset-y));
+    z-index: if($module ==edge-platform or $module ==simulation-platform, 2, 3);
+
+    .outer-base {
+      width: var(--#{$module}-base-width);
+      height: var(--#{$module}-base-height);
+    }
+
+    .peripheral-component {
+      left: var(--#{$module}-component-x);
+      top: var(--#{$module}-component-y);
+      width: var(--#{$module}-component-width);
+      height: var(--#{$module}-component-height);
+    }
+  }
+}
+
+.operator {
+  position: absolute;
+  left: calc(600px + var(--operator-offset-x));
+  top: calc(450px + var(--operator-offset-y));
+  z-index: 4;
+
+  .operator-component {
+    position: relative;
+    width: var(--operator-component-width);
+    height: var(--operator-component-height);
+    transition: $transition-bounce;
+    @include svg-container;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
+  }
+
+  &.js-hover:not(.debug-draggable),
+  &:hover:not(.debug-draggable) {
+    .operator-component {
+      transform: translateY(-6px) scale(1.05);
+      filter: brightness(1.2) drop-shadow(0 4px 12px rgba(0, 229, 255, 0.4));
+    }
+  }
+
+  &.debug-draggable {
+    @extend %debug-draggable-base;
+
+    &.debug-dragging {
+      .operator-component {
+        filter: brightness(1.5) drop-shadow(0 12px 24px rgba(255, 71, 87, 0.4));
+        transform: translateY(-8px) scale(1.1);
+      }
+    }
+  }
+}
+
+.platform-wrapper {
+  will-change: transform;
+  backface-visibility: hidden;
+
+  * {
+    transform-style: preserve-3d;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 2dppx) {
+  .platform-wrapper {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+@media (min-width: $breakpoint-xxl) {
+  .platform-wrapper {
+    transform: translate(-50%, -50%);
+  }
+
+  .peripheral-component {
+    min-width: 180px;
+    min-height: 120px;
+  }
+
+  .outer-base {
+    min-width: 280px;
+    min-height: 200px;
+  }
+}
+
+@media (max-width: $breakpoint-xxl) and (min-width: $breakpoint-largeTablet) {
+  .platform-wrapper {
+    transform: scale(1.05) translate(-47.6%, -47.6%);
+  }
+}
+
+@media (max-width: $breakpoint-largeTablet) and (min-width: $breakpoint-xl) {
+  .platform-wrapper {
+    transform: scale(0.98) translate(-51.0%, -51.0%);
+  }
+}
+
+@media (max-width: $breakpoint-xl) and (min-width: $breakpoint-lg) {
+  .platform-wrapper {
+    transform: scale(0.95) translate(-52.6%, -52.6%);
+  }
+
+  .peripheral-component {
+    min-width: 160px;
+    min-height: 100px;
+  }
+
+  .outer-base {
+    min-width: 240px;
+    min-height: 180px;
+  }
+}
+
+@media (max-width: $breakpoint-lg) and (min-width: $breakpoint-md) {
+  .platform-wrapper {
+    transform: scale(0.85) translate(-58.8%, -58.8%);
+  }
+
+  .peripheral-component {
+    min-width: 140px !important;
+    min-height: 90px !important;
+  }
+
+  .outer-base {
+    min-width: 220px !important;
+    min-height: 160px !important;
+  }
+
+  .edge-platform,
+  .simulation-platform,
+  .data-manage-platform,
+  .parent-system {
+    opacity: 0.95;
+  }
+}
+
+@media (max-width: $breakpoint-md) and (min-width: $breakpoint-sm) {
+  .platform-wrapper {
+    transform: scale(0.7) translate(-71.4%, -71.4%);
+  }
+
+  .peripheral-component {
+    min-width: 120px !important;
+    min-height: 80px !important;
+  }
+
+  .outer-base {
+    min-width: 200px !important;
+    min-height: 150px !important;
+  }
+
+  .edge-platform,
+  .simulation-platform,
+  .data-manage-platform,
+  .parent-system {
+    opacity: 0.9;
+  }
+
+  .operator {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: $breakpoint-sm) and (min-width: $breakpoint-xs) {
+  .platform-wrapper {
+    transform: scale(0.6) translate(-83.3%, -66.7%);
+    transform-origin: center top;
+  }
+
+  .edge-platform,
+  .simulation-platform,
+  .data-manage-platform,
+  .parent-system {
+    opacity: 0.8;
+  }
+
+  .operator {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .animated-beam {
+    opacity: 0.6;
+
+    &:nth-child(n+6) {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-xs) {
+  .platform-wrapper {
+    transform: scale(0.5) translate(-100%, -60%);
+    transform-origin: center top;
+  }
+
+  .business-module {
+    opacity: 0.95;
+  }
+
+  .edge-platform,
+  .simulation-platform,
+  .data-manage-platform,
+  .parent-system {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .operator,
+  .animated-beam {
+    display: none;
+  }
+
+  .debug-label,
+  .component-debug-label {
+    font-size: 8px;
+    padding: 2px 4px;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 2dppx) {
+  .platform-wrapper {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  .platform-title,
+  .peripheral-title {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+
+  .platform-base-container,
+  .business-module,
+  .edge-platform,
+  .simulation-platform,
+  .data-manage-platform,
+  .parent-system,
+  .operator {
+    &:hover {
+      filter: none !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+
+  .peripheral-title {
+    padding: 8px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.debug-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -2;
+  opacity: 0.3;
+}
+
+.center-cross {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: #00e5ff;
+  }
+
+  &::before {
+    width: 40px;
+    height: 2px;
+    left: -20px;
+    top: -1px;
+  }
+
+  &::after {
+    width: 2px;
+    height: 40px;
+    left: -1px;
+    top: -20px;
+  }
+}
+
+.grid-lines {
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: -1px -1px;
+}
+
+.business-module-data-processing :deep(.data-processing),
+.business-module-algo-runtime :deep(.algo-runtime) {
+  position: absolute;
+  top: 44%;
+  left: 51%;
+  transform: translate(-50%, -50%);
+
+  display: block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 8px 16px rgba(0, 229, 255, 0.3));
+
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.business-module-data-mart :deep(.data-mart) {
+  position: absolute;
+  top: 56%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  display: block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 8px 16px rgba(0, 229, 255, 0.3));
+}
+
+.business-module-algo-repo :deep(.algo-repo) {
+  position: absolute;
+  top: 57%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  display: block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 8px 16px rgba(0, 229, 255, 0.3));
+}
+
+.business-module-data-processing:hover :deep(.data-processing),
+.business-module-data-processing.js-hover :deep(.data-processing),
+.business-module-algo-runtime:hover :deep(.algo-runtime),
+.business-module-algo-runtime.js-hover :deep(.algo-runtime),
+.business-module-data-mart:hover :deep(.data-mart),
+.business-module-data-mart.js-hover :deep(.data-mart),
+.business-module-algo-repo:hover :deep(.algo-repo),
+.business-module-algo-repo.js-hover :deep(.algo-repo) {
+  filter: drop-shadow(0 12px 24px rgba(0, 229, 255, 0.5));
+}
+
+.business-module-data-processing {
+  :deep(.module-title) {
+    top: 54%;
+    left: 22%;
+    transform: translate(0, 0) skew(-1deg, 32deg);
+  }
+}
+
+.business-module-data-mart {
+  :deep(.module-title) {
+    top: 54%;
+    left: 24%;
+    transform: translate(0, 0) skew(-6deg, 31deg);
+  }
+}
+
+.business-module-algo-repo {
+  :deep(.module-title) {
+    top: 54%;
+    left: 24%;
+    transform: translate(0, 0) skew(-8deg, 32deg);
+  }
+}
+
+.business-module-algo-runtime {
+  :deep(.module-title) {
+    top: 56%;
+    left: 25%;
+    transform: translate(0, 0) skew(-10deg, 30deg);
+  }
+}
+
+.algo-to-edge-beam {
+  transform: rotate(-30deg) skewX(31deg) translate(2.8%, 17%);
+
+  @media (max-width: $breakpoint-xs) {
+    transform: rotate(-30deg) skewX(31deg) translate(1.5%, 15%);
+  }
+
+  @media (max-width: $breakpoint-sm) and (min-width: $breakpoint-xs) {
+    transform: rotate(-30deg) skewX(31deg) translate(2.2%, 16%);
+  }
+
+  @media (max-width: $breakpoint-md) and (min-width: $breakpoint-sm) {
+    transform: rotate(-30deg) skewX(31deg) translate(2.5%, 16.5%);
+  }
+
+  @media (max-width: $breakpoint-lg) and (min-width: $breakpoint-md) {
+    transform: rotate(-30deg) skewX(31deg) translate(2.7%, 15.8%);
+  }
+
+  @media (max-width: $breakpoint-xl) and (min-width: $breakpoint-lg) {
+    transform: rotate(-30deg) skewX(31deg) translate(2.9%, 16.5%);
+  }
+
+  @media (max-width: $breakpoint-largeTablet) and (min-width: $breakpoint-xl) {
+    transform: rotate(-30deg) skewX(31deg) translate(3.0%, 16.8%);
+  }
+
+  @media (max-width: $breakpoint-tv) and (min-width: $breakpoint-xxl) {
+    transform: rotate(-30deg) skewX(31deg) translate(3.2%, 17.5%);
+  }
+
+  @media (min-width: $breakpoint-tv) {
+    transform: rotate(-30deg) skewX(31deg) translate(3.5%, 18%);
+  }
+}
+
+.runtime-to-simulation-beam {
+  transform: rotate(-30deg) skewX(31deg) translate(-19%, 7%);
+
+  @media (max-width: $breakpoint-xs) {
+    transform: rotate(-30deg) skewX(31deg) translate(-16%, 5%);
+  }
+
+  @media (max-width: $breakpoint-sm) and (min-width: $breakpoint-xs) {
+    transform: rotate(-30deg) skewX(31deg) translate(-17.5%, 6%);
+  }
+
+  @media (max-width: $breakpoint-md) and (min-width: $breakpoint-sm) {
+    transform: rotate(-30deg) skewX(31deg) translate(-18.2%, 6.5%);
+  }
+
+  @media (max-width: $breakpoint-lg) and (min-width: $breakpoint-md) {
+    transform: rotate(-30deg) skewX(31deg) translate(-18.7%, 6.8%);
+  }
+
+  @media (max-width: $breakpoint-xl) and (min-width: $breakpoint-lg) {
+    transform: rotate(-30deg) skewX(31deg) translate(-19.2%, 7.2%);
+  }
+
+  @media (max-width: $breakpoint-largeTablet) and (min-width: $breakpoint-xl) {
+    transform: rotate(-30deg) skewX(31deg) translate(-19.0%, 7.3%);
+  }
+
+  @media (max-width: $breakpoint-tv) and (min-width: $breakpoint-xxl) {
+    transform: rotate(-30deg) skewX(31deg) translate(-18.1%, 7.5%);
+  }
+
+  @media (min-width: $breakpoint-tv) {
+    transform: rotate(-30deg) skewX(31deg) translate(-20.5%, 8%);
+  }
+}
+
+.data-manage-to-mart-beam {
+  transform: rotate(-28deg) skewX(21deg) skewX(13deg) translate(9.6%, -17.2%);
+
+  @media (max-width: $breakpoint-xs) {
+    transform: rotate(-28deg) skewX(21deg) skewX(13deg) translate(8%, -14%);
+  }
+
+  @media (max-width: $breakpoint-sm) and (min-width: $breakpoint-xs) {
+    transform: rotate(-28deg) skewX(21deg) skewX(13deg) translate(9%, -15.5%);
+  }
+
+  @media (max-width: $breakpoint-md) and (min-width: $breakpoint-sm) {
+    transform: rotate(-28deg) skewX(21deg) skewX(13deg) translate(9.5%, -16.2%);
+  }
+
+  @media (max-width: $breakpoint-lg) and (min-width: $breakpoint-md) {
+    transform: rotate(-28deg) skewX(21deg) skewX(13deg) translate(9.8%, -16.8%);
+  }
+
+  @media (max-width: $breakpoint-xl) and (min-width: $breakpoint-lg) {
+    transform: rotate(-28deg) skewX(21deg) skewX(13deg) translate(10.0%, -17.0%);
+  }
+
+  @media (max-width: $breakpoint-largeTablet) and (min-width: $breakpoint-xl) {
+    transform: rotate(-28deg) skewX(21deg) skewX(13deg) translate(10%, -17.2%);
+  }
+
+  @media (max-width: $breakpoint-tv) and (min-width: $breakpoint-xxl) {
+    transform: rotate(-28deg) skewX(21deg) skewX(13deg) translate(10.2%, -17.2%);
+  }
+
+  @media (min-width: $breakpoint-tv) {
+    transform: rotate(-28deg) skewX(21deg) skewX(13deg) translate(12%, -14.5%)
+  }
+}
+
+.runtime-to-repo-beam {
+  transform: rotate(-35deg) skewX(28deg) translate(-180px, 45px);
+  // @media (min-width: $breakpoint-xxl) {
+  //   transform: rotate(-35deg) skewX(28deg) translate(-200px, 50px);
+  // }
+
+  @media (min-width: $breakpoint-tv) {
+    transform: rotate(-35deg) skewX(28deg) translate(-258px, 75px)
+  }
+}
+
+.data-manage-to-processing-beam {
+  transform: rotate(29deg) skewX(-30deg) translate(-1%, 15%);
+
+  @media (max-width: $breakpoint-xs) {
+    transform: rotate(29deg) skewX(-30deg) translate(0%, 12%);
+  }
+
+  @media (max-width: $breakpoint-sm) and (min-width: $breakpoint-xs) {
+    transform: rotate(29deg) skewX(-30deg) translate(-0.5%, 13.5%);
+  }
+
+  @media (max-width: $breakpoint-md) and (min-width: $breakpoint-sm) {
+    transform: rotate(29deg) skewX(-30deg) translate(-0.8%, 14.2%);
+  }
+
+  @media (max-width: $breakpoint-lg) and (min-width: $breakpoint-md) {
+    transform: rotate(29deg) skewX(-30deg) translate(-0.9%, 14.7%);
+  }
+
+  @media (max-width: $breakpoint-xl) and (min-width: $breakpoint-lg) {
+    transform: rotate(29deg) skewX(-30deg) translate(-1.2%, 15.2%);
+  }
+
+  @media (max-width: $breakpoint-largeTablet) and (min-width: $breakpoint-xl) {
+    transform: rotate(29deg) skewX(-30deg) translate(-1.3%, 15.5%);
+  }
+
+  @media (max-width: $breakpoint-tv) and (min-width: $breakpoint-xxl) {
+    transform: rotate(29deg) skewX(-30deg) translate(0.5%, 16%);
+  }
+
+  @media (min-width: $breakpoint-tv) {
+    transform: rotate(29deg) skewX(-30deg) translate(-1.5%, 15%);
+  }
+}
+
+// GIF 平台样式 - 修复显示变形问题
+.edge-platform-gif,
+.simulation-platform-gif,
+.data-manage-platform-gif,
+.parent-system-gif {
+  // 确保图片保持原始比例
+  object-fit: contain;
+  // 防止图片被拉伸变形
+  object-position: center;
+  // 确保图片完全显示在容器内
+  max-width: 100%;
+  max-height: 100%;
+  // 居中显示
+  display: block;
+  // 保持原始宽高比
+  aspect-ratio: auto;
+  // 统一尺寸
+
+  // 确保在hover时也保持比例
+  &:hover {
+    object-fit: contain;
+  }
+}
+
+// 针对不同平台的细微调整
+.edge-platform-gif {
+  height: 180px !important;
+}
+
+.simulation-platform-gif {
+  // 仿真平台尺寸调整
+  width: 160px !important;
+  height: 170px !important;
+}
+
+.data-manage-platform-gif {
+  width: 148px !important;
+  height: 145px !important;
+}
+
+.parent-system-gif {
+  // 上级系统尺寸调整
+  width: 155px !important;
+  height: 155px !important;
+}

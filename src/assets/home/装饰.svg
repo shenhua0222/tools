@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="671px" height="12px" viewBox="0 0 671 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>装饰</title>
+    <g id="算法演进" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="概况" transform="translate(-747, -450)">
+            <g id="装饰" transform="translate(747, 450)">
+                <g id="分组">
+                    <polyline id="矩形-copy-19" stroke="#1C5BEC" transform="translate(335.9561, 6) scale(-1, 1) rotate(-360) translate(-335.9561, -6)" points="670.412108 1.49998569 661.412156 10.4999914 479.412013 10.4999914 470.41206 1.49998569 1.5 1.49998569"></polyline>
+                    <path d="M1.5,0 C2.32842748,0 3,0.671574427 3,1.5 C3,2.32842748 2.32842748,3 1.5,3 C0.671574427,3 0,2.32842748 0,1.5 C0,0.671574427 0.671574427,0 1.5,0 C1.5,0 1.5,0 1.5,0 Z" id="椭圆形" fill="#1C5BEC"></path>
+                    <polygon id="矩形-copy-36" fill="#1C5BEC" transform="translate(219.7501, 2.25) scale(-1, 1) rotate(-360) translate(-219.7501, -2.25)" points="231.500147 1.50000095 231.500147 3.00000191 208.000132 3.00000191 208.000132 1.50000095"></polygon>
+                    <polygon id="矩形-copy-38" fill="#1C5BEC" transform="translate(101.5001, 11.25) scale(-1, 1) rotate(-360) translate(-101.5001, -11.25)" points="192.500122 10.499999 192.500122 12 10.5000067 12 10.5000067 10.499999"></polygon>
+                </g>
+                <path d="M655.432687,7.50000445 L653.76602,9.50000445 L643.067728,9.50000445 L644.734395,7.50000445 L655.432687,7.50000445 Z" id="矩形-copy-22" stroke="#24C1F7" fill-opacity="0.600000024" fill="#24C1F7" transform="translate(649.2502, 8.5) scale(-1, 1) rotate(-360) translate(-649.2502, -8.5)"></path>
+                <path d="M629.293075,7.50000445 L627.293075,9.50000445 L616.707288,9.50000445 L618.707288,7.50000445 L629.293075,7.50000445 Z" id="矩形-copy-40" stroke-opacity="0.301960796" stroke="#24C1F7" fill-opacity="0.200000003" fill="#24C1F7" transform="translate(623.0002, 8.5) scale(-1, 1) rotate(-360) translate(-623.0002, -8.5)"></path>
+                <path d="M642.432669,7.50000445 L640.766003,9.50000445 L630.067711,9.50000445 L631.734378,7.50000445 L642.432669,7.50000445 Z" id="矩形-copy-39" stroke-opacity="0.400000006" stroke="#24C1F7" fill-opacity="0.301960796" fill="#24C1F7" transform="translate(636.2502, 8.5) scale(-1, 1) rotate(-360) translate(-636.2502, -8.5)"></path>
+                <path d="M616.293066,7.50000445 L614.293066,9.50000445 L603.70728,9.50000445 L605.70728,7.50000445 L616.293066,7.50000445 Z" id="矩形-copy-41" stroke-opacity="0.200000003" stroke="#24C1F7" fill-opacity="0.101960786" fill="#24C1F7" transform="translate(610.0002, 8.5) scale(-1, 1) rotate(-360) translate(-610.0002, -8.5)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,451 @@
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+/* 隐藏所有数字输入框的加减按钮（全局） */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.td-detail {
+  background-color: var(--td-primary-bg);
+  padding-bottom: var(--el-main-padding);
+//   margin-top: var(--el-main-padding);
+  // padding-right:10px;
+  padding-top: 16px;
+  .container-card {
+    background-color: var(--td-container-card-bg);
+    padding: 10px;
+  }
+  .detail-tabs {
+    position: relative;
+    .title-wrapper {
+      position: absolute;
+      z-index: 9;
+      font-size: var(--el-font-size-medium);
+      // top: 4px;
+      left: 16px;
+      .title {
+        font-size: var(--el-font-size-medium);
+        margin-right: 25px;
+      }
+      .el-tag {
+        margin-right: 6px;
+      }
+    }
+    .actions-wrapper {
+      position: absolute;
+      z-index: 9;
+      right: 20px;
+      // top: 4px;
+    }
+    .el-tabs {
+      .el-tabs__item {
+        font-size: var(--el-font-size-medium);
+        .custom-tabs-label {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+// 弹窗样式
+:deep(.el-dialog.td-dialog) {
+  background-color: var(--td-primary-bg);
+  .el-dialog__header {
+    border-bottom: 1px solid var(--el-border-color-dialog-header);
+    margin-bottom: 20px;
+  }
+}
+
+.blue-tag {
+  background-color: var(--el-bg-color-blue-button);
+}
+
+.no-border {
+  border: none !important;
+}
+.break-all {
+  word-break: break-all;
+}
+
+// 带梯度标签的元素样式
+.td-dialog {
+  .el-dialog__header {
+    padding-bottom: 8px;
+    .el-dialog__title {
+      font-size: 16px;
+    }
+  }
+  #app {
+    min-width: 1200px;
+  }
+  .el-table {
+    .cell {
+      height: 45px;
+    }
+  }
+}
+
+.td-card {
+  .el-card__body {
+    padding: 16px;
+  }
+}
+
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+
+.module-bg {
+  background-color: var(--td-primary-bg);
+}
+.module-wrap {
+  padding: 16px;
+}
+.border-radius-2 {
+  border-radius: 2px;
+}
+.table-wrap {
+  padding: 12px 16px 4px;
+}
+
+.bg-level-3 {
+  background-color: var(--td-color-process-module);
+}
+.bg-level-4 {
+  background-color: var(--td-color-process-module-item);
+}
+.bg-level-5 {
+  background-color: var(--td-color-process-module-item-light);
+}
+
+.md {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.margin-0 {
+  margin: 0;
+}
+
+.mt-1-5 {
+  margin-top: 6px;
+}
+
+.mt-12-5 {
+  margin-top: 14px;
+}
+
+
+.dis-blk {
+  display: block !important;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.dis-flex {
+  display: flex !important;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-auto {
+  flex: auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+
+
+.fw-nm {
+  font-weight: normal;
+}
+.fw-bd {
+  font-weight: bold;
+}
+
+.secondary-txt {
+  color: var(--el-text-color-secondary);
+}
+
+.gap-2-5 {
+  gap: 10px;
+}
+.gap-2-8 {
+  gap: 16px;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.align-center {
+  align-items: center;
+}
+
+.text-xl {
+  font-size: 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.cursor-default {
+  cursor: default !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.el-button {
+  svg {
+    width: 14px;
+  }
+}
+
+.button-icon {
+  font-size: 15px;
+//   margin-bottom: 2px;
+}
+
+.min-h-40 {
+  min-height: 160px;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.h-full {
+  height: 100%;
+}
+
+// .el-dialog {
+//     max-width: 1200px;
+//     width: 80%;
+// }
+
+// flex布局相关
+.dis-flex {
+  display: flex;
+}
+.jc-sb {
+  justify-content: space-between;
+}
+.al-c {
+  align-items: center;
+}
+.fd-c {
+  flex-direction: column;
+}
+
+// 自定义表单相关css
+ul.feature {
+  width: 100%;
+  list-style-type: none;
+  li {
+    padding: 4px 16px;
+    margin-bottom: 16px;
+    border-radius: 2px;
+    background-color: var(--el-color-info-light-7);
+  }
+}
+.centre-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 16px;
+  margin-bottom: 16px;
+  border-radius: 2px;
+  background-color: var(--el-color-info-light-7);
+}
+
+.no-wrap {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vert-alg-0 {
+  vertical-align: 0px;
+}
+.vert-alg-1 {
+  vertical-align: -1px;
+}
+
+// 流程图公共样式
+.process-box {
+  width: 276px;
+  font-size: 12px;
+  margin-left: 16px;
+  max-width: 300px;
+  padding: 8px 0;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid var(--td-color-process-module);
+  &.active {
+    border-color: #3473a8;
+  }
+  &:hover {
+    background-color: var(--td-color-process-module-hover);
+  }
+  &:first-child {
+    margin-left: 0;
+  }
+  .title {
+    padding: 0 16px 4px;
+    border-bottom: 1px solid var(--td-color-process-module-divider);
+  }
+  .content {
+    padding: 0 8px;
+    .item {
+      .item-value {
+        background-color: var(--td-color-process-module-item);
+      }
+    }
+  }
+}
+
+/* 样式差异修正*/
+.no-padding {
+  padding: 0;
+}
+
+/* 公共样式差异修正*/
+.el-popper.is-light {
+  background-color: var(--td-primary-bg);
+}
+.el-popper.is-light > .el-popper__arrow::before {
+  background-color: var(--td-primary-bg);
+}
+
+.el-table__header-wrapper .el-table-column--selection > .cell, .el-table__body-wrapper .el-table-column--selection > .cell {
+    display: block;
+}
+
+$sizes: (0, 4, 5, 6, 8, 10, 12, 14, 15, 16, 18, 20, 22, 24, 25, 26, 28, 30);
+@each $size in $sizes {
+  .m-#{$size} {
+    margin: #{$size}px;
+  }
+  .mx-#{$size} {
+    margin-left: #{$size}px;
+    margin-right: #{$size}px;
+  }
+  .my-#{$size} {
+    margin-top: #{$size}px;
+    margin-bottom: #{$size}px;
+  }
+  .mt-#{$size} {
+    margin-top: #{$size}px;
+  }
+  .mr-#{$size} {
+    margin-right: #{$size}px;
+  }
+  .ml-#{$size} {
+    margin-left: #{$size}px;
+  }
+  .mb-#{$size} {
+    margin-bottom: #{$size}px;
+  }
+  .p-#{$size} {
+    padding: #{$size}px;
+  }
+  .py-#{$size} {
+    padding-top: #{$size}px;
+    padding-bottom: #{$size}px;
+  }
+  .px-#{$size} {
+    padding-left: #{$size}px;
+    padding-right: #{$size}px;
+  }
+  .pt-#{$size} {
+    padding-top: #{$size}px;
+  }
+  .pr-#{$size} {
+    padding-right: #{$size}px;
+  }
+  .pb-#{$size} {
+    padding-bottom: #{$size}px;
+  }
+  .pl-#{$size} {
+    padding-left: #{$size}px;
+  }
+}
+
+$font-sizes: (10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30);
+@each $size in $font-sizes {
+  .fz-#{$size} {
+    font-size: #{$size}px;
+  }
+}
+
+html.dark {
+  --el-bg-color: #202630;
+  --el-bg-color-overlay: #232324;
+  --el-text-color-primary: #fff;
+  --el-text-color-regular: #d3d3d3;
+  --el-border-color: #464646;
+  --el-color-primary: #409eff;
+  /* 你可以根据需要继续添加更多变量 */
+  --aside-border-color: #303641;
+  --el-border-color: #504f4f !important;
+
+  --el-fill-color-light: rgba(80, 80, 80, .5);
+  --el-color-info-light-3: rgb(140, 142, 148);
+  --el-color-info-light-5: rgb(120, 122, 128);
+  --el-color-info-light-7: rgb(100, 102, 108);
+  --el-color-info-light-8: rgb(85, 87, 92);
+  --el-color-info-light-9: rgb(70, 72, 76);
+  //left menu width
+  --el-aside-width: 240px;
+
+  .el-table {
+    --el-table-border-color: var(--el-border-color) !important;
+  }
+
+  .v-config-table.el-table th {
+    background-color: var(--el-bg-color-table-th);
+  }
+}

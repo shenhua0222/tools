@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500px" height="32px" viewBox="0 0 500 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>矩形备份 15</title>
+    <defs>
+        <radialGradient cx="48.635%" cy="100%" fx="48.635%" fy="100%" r="90.4247237%" gradientTransform="translate(0.4864, 1), scale(0.064, 1), rotate(76.3594), scale(1, 8.4526), translate(-0.4864, -1)" id="radialGradient-1">
+            <stop stop-color="#008CFF" stop-opacity="0.200000003" offset="0%"></stop>
+            <stop stop-color="#0080FF" stop-opacity="0" offset="100%"></stop>
+        </radialGradient>
+        <polygon id="path-2" points="1420 659 920 659 920 627 1420 627"></polygon>
+        <filter x="-0.6%" y="-9.4%" width="101.2%" height="118.8%" filterUnits="objectBoundingBox" id="filter-3">
+            <feGaussianBlur stdDeviation="3" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.0586509146   0 0 0 0 0.386405379   0 0 0 0 1  0 0 0 0.586975524 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="算法演进" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="矩形备份-15" transform="translate(-920, -627)">
+            <use fill="url(#radialGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+            <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+        </g>
+    </g>
+</svg>

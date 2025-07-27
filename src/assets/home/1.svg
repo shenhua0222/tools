@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="321px" height="222px" viewBox="0 0 321 222" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>1</title>
+    <defs>
+        <radialGradient cx="50.0002%" cy="100%" fx="50.0002%" fy="100%" r="85.9548762%" gradientTransform="translate(0.5, 1), scale(0.6894, 1), rotate(88.681), scale(1, 0.6888), translate(-0.5, -1)" id="radialGradient-1">
+            <stop stop-color="#00A6FF" stop-opacity="0.152941182" offset="0%"></stop>
+            <stop stop-color="#00B3FF" stop-opacity="0" offset="100%"></stop>
+        </radialGradient>
+        <path d="M0,0 L320.694408,0.19261 L320.862021,121.436082 C268.293044,125.034399 226.562376,168.07732 225.042869,221.191996 L0,221.19261 L0,0 Z" id="path-2"></path>
+        <filter x="-4.7%" y="-6.8%" width="109.3%" height="113.6%" filterUnits="objectBoundingBox" id="filter-3">
+            <feGaussianBlur stdDeviation="15" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.666666687   0 0 0 0 1  0 0 0 0.211764708 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <radialGradient cx="48.635%" cy="100%" fx="48.635%" fy="100%" r="87.9196913%" gradientTransform="translate(0.4864, 1), scale(0.4826, 1), rotate(88.1568), scale(1, 1.2617), translate(-0.4864, -1)" id="radialGradient-4">
+            <stop stop-color="#008CFF" stop-opacity="0.200000003" offset="0%"></stop>
+            <stop stop-color="#0080FF" stop-opacity="0" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="算法演进" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="概况" transform="translate(-32, -471)">
+            <g id="1" transform="translate(32, 471.8074)">
+                <g id="编组-13" transform="translate(0, 0)">
+                    <g id="形状结合">
+                        <use fill-opacity="0.0509803928" fill="#000000" fill-rule="evenodd" xlink:href="#path-2"></use>
+                        <use fill="url(#radialGradient-1)" fill-rule="evenodd" xlink:href="#path-2"></use>
+                        <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+                        <path stroke="#273AA3" stroke-width="1" d="M0.5,0.500300392 L320.195098,0.692310203 L320.361376,120.970232 C294.085109,122.887183 270.53165,134.613662 253.347316,152.504019 C236.233709,170.320745 225.436926,194.250521 224.558092,220.691997 L0.5,220.692609 L0.5,0.500300392 Z" stroke-linejoin="square"></path>
+                    </g>
+                    <g id="编组-7" transform="translate(0.3569, 66.451)" fill="url(#radialGradient-4)">
+                        <polygon id="矩形" points="319.464115 0 319.464115 154.178881 0 154.178881 0 0"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

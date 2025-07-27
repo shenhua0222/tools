@@ -1,0 +1,345 @@
+@forward "element-plus/theme-chalk/src/mixins/config.scss";
+// with (
+//   $namespace: ''
+// );
+
+/* 覆盖你需要的变量 */
+@forward "element-plus/theme-chalk/src/common/var.scss" with (
+    $colors: (
+        "white": #ffffff,
+        "black": #000000,
+        "primary": (
+            "base": #0078d4,
+        ),
+        "success": (
+            "base": #20b168,
+        ),
+        "warning": (
+            "base": #e39832,
+        ),
+        "danger": (
+            "base": #e75655,
+        ),
+        "error": (
+            "base": #e75655,
+        ),
+        "info": (
+            "base": #8092bc,
+        ),
+    ),
+    $text-color: (
+        "": #F3F3F3,
+        "primary": #F3F3F3,
+        "regular": #F3F3F3,
+        "light": #ffffff,
+        "secondary": #E3E3E3,
+        "placeholder": #E3E3E3,
+        "disabled": #727A7E,
+        "thirdly": #aaaaaa,
+    ),
+    $border-color: (
+        "": #414b64,
+        "light": #414b64,
+        "lighter": #414b64,
+        "extra-light": #414b64,
+        "dark": #374055,
+        "darker": #374055,
+        "dialog-header": #272C36,
+        "gap": #2E3A4A,
+    ),
+    $fill-color: (
+        "": #414b64,
+        "light": #424656,
+        "lighter": #626875,
+        "extra-light": #626875,
+        "dark": #333a4c,
+        "darker": #293040,
+        "blank": "transparent",
+    ),
+    $bg-color: (
+        "": #202630,
+        "lv-1": #1C232C,
+        "lv-2": #303540,
+        "lv-3": #373B46,
+        "selector": #434343,
+        "page": #1f1f1f,
+        "app-main": #707070,
+        "blue-button": #2B6698,
+        "blue-tag": #2B6698,
+        "table-th": #373B46,
+        "yt-chat-a": #323C48,
+        "yt-chat-q": #37495E,
+        // "overlay": #ffffff,
+    ),
+    $overlay-color: (
+        "": rgba(0, 0, 0, 0.8),
+        "light": rgba(0, 0, 0, 0.7),
+        "lighter": rgba(0, 0, 0, 0.5),
+    ),
+    $border-radius: (
+        "base": 4px,
+        "small": 2px,
+        "large": 8px,
+        "round": 20px,
+        "circle": 100%,
+    ),
+    $disabled: (
+        "bg-color": "var(--el-fill-color-dark)",
+        "text-color": #739ebd,
+        "border-color": "var(--el-border-color-dark)",
+    ),
+    $font-family: (
+        "": "微软雅黑, Helvetica, Arial, San Francisco, Helvetica Neue, PingFang SC, Hiragino Sans GB,sans-serif",
+    ),
+    $font-size: (
+        "title-extra-large": 48px,
+        "title-large": 36px,
+        "title-big": 30px,
+        "title-medium": 24px,
+        "extra-large": 20px,
+        "large": 18px,
+        "medium": 16px,
+        "base": 14px,
+        "small": 13px,
+        "extra-small": 12px,
+    )
+);
+
+@use "./mixin.scss" as *;
+@use "sass:color";
+
+/****************************** 效能评估主色 **********************************/
+$eff-primary-color: #1ca6f5;
+$eff-fill-rad: #ff00ff;
+$eff-fill-radk: #00e5ff;
+$eff-fill-ele: #ffff00;
+$eff-fill-sar: #0083ff;
+$eff-fill-opt: #00ff00;
+$eff-fill-relay: #f85252;
+$eff-card-border: #20489d;
+$eff-chart-rad: #0083ff;
+$eff-chart-radk: #00e5ff;
+$eff-chart-ele: #ff9c00;
+$eff-chart-sar: #00ff78;
+$eff-chart-opt: #ff00f6;
+$eff-chart-relay: #f85252;
+// 亮色主题
+html {
+    @include propertyClass();
+    & {
+        @include lightTypes();
+        @include opacityTypes();
+    }
+    & {
+        /*********************主色 ************************/
+        // 点击
+        --color-primary-click: #006fbf;
+        // 常规
+        --color-primary-regular: #0078d4;
+        // 浅色/白底悬浮
+        --color-primary-hover-light: #34688e;
+        // 悬浮
+        --color-primary-hover: #2086d0;
+        // 特殊场景
+        --color-primary-special: #388dca;
+        // 一般禁用
+        --color-primary-disabled: #6093b7;
+        // 文字禁用
+        --color-primary-disabled-text: #739ebd;
+        /********************* 中性色-线条 ************************/
+        // 常规/白底
+        --color-line: #414b64;
+        // 深/灰底
+        --color-line-dark: #374055;
+        /********************* 侧边栏,顶部标签栏菜单样式 ************************/
+        // 当前菜单背景
+        --menu-bg-color: #121619;
+        --aside-active-bg-color: rgba(0, 124, 214, 0.15);
+        --aside-border-color: #292929;
+        --aside-submenu-active-bg-color: rgba(255, 255, 255, 0.1);
+        --topmenu-active-bg-color: rgba(37, 133, 203, 0.48);
+        --topnav-search-fill-color: #181C20;
+        --topnav-border-color: #202227;
+        /********************* 字体对应的行高 *********************/
+        --line-height-12: 20px;
+        --line-height-14: 22px;
+        --line-height-16: 24px;
+        --line-height-18: 26px;
+        --line-height-20: 28px;
+        --line-height-24: 32px;
+        --line-height-36: 44px;
+        --line-height-48: 56px;
+        /**************************** 阴影 *******************************/
+        --box-shadow-1: 0 2px 5px rgba(0, 0, 0, 0.1);
+        --box-shadow-2: 0 2px 10px rgba(0, 0, 0, 0.1);
+        /**************************** 间距, 内边距，外边距 *******************************/
+        --gap-mini: 2px;
+        --gap-small: 4px;
+        --gap-small-1: 8px;
+        --gap-small-1-5: 12px;
+        --gap-small-2: 14px;
+        --gap-medium: 16px;
+        --gap-medium-1: 20px;
+        --gap-medium-2: 24px;
+        --gap-medium-3: 32px;
+        --gap-large: 40px;
+        --gap-large-1: 44px;
+        --gap-large-2: 56px;
+        --gap-large-3: 60px;
+        /**************************** 进度条 *******************************/
+        /**长条形**/
+        --progress-small-width: 220px;
+        --progress-small-stroke-width: 4px;
+        --progress-medium-width: 240px;
+        --progress-medium-stroke-width: 7px;
+        --progress-large-width: 260px;
+        --progress-large-stroke-width: 10px;
+        /**环形**/
+        --progress-cirle-small-width: 78px;
+        --progress-cirle-small-stroke-width: 4px;
+        --progress-cirle-medium-width: 114px;
+        --progress-cirle-medium-stroke-width: 7px;
+        --progress-cirle-large-width: 160px;
+        --progress-cirle-large-stroke-width: 10px;
+        /**************************** spod-radio-group *******************************/
+        --spod-radio-group-bg-color: rgba(0, 100, 255, 0.06);
+        --spod-radio-group-active-bg-color: rgba(46, 130, 255, 0.16);
+        /**************************** spod-progress *******************************/
+        --progress-border-color-primary: rgba(38, 52, 64, 1);
+        --progress-color-primary: #9df8fc;
+        --progress-bg-color-track: rgba(32, 63, 99, 1);
+        --progress-bg-color-start: var(--el-color-primary);
+        --progress-bg-color-end: rgba(195, 252, 254, 1);
+        /**************************** 服务应用情况、训练任务情况 *******************************/
+        --server-use-color-1: #52C268;
+        --server-use-color-2: #5BE8C6;
+        --server-use-color-3: #5B8CE8;
+        --server-use-color-4: #E8D15B;
+        --server-use-color-5: #E09E4F;
+        --server-use-color-6: #E9E457;
+        /**************************** 报警数量统计折线图颜色 *******************************/
+        --warn-count-color-urgency: #52C268;
+        --warn-count-color-importance: #5BE8C6;
+        --warn-count-color-warning: #5B8CE8;
+        --warn-count-color-error: #E8D15B;
+        --warn-count-color-remind: #E09E4F;
+        /**************************** 表单元素 *******************************/
+        --el-checkbox-height: 30px;
+
+        /**************************** tag *******************************/
+        --tag-bg-color: rgba(30, 180, 255, 0.5);
+        --tag-border-color: rgba(30, 180, 255, 1);
+
+        /************************效能评估开始*************************/
+        --eff-bg-color-tooltip: #6a7985;
+        --eff--title-color: #{$eff-primary-color};
+        --eff-text-color: var(--el-text-color);
+        --eff-border-color: #{rgba($eff-primary-color, 40%)};
+        --eff-border-light: #{color.scale($eff-primary-color, $lightness: 40%)};
+        --eff-primary-color: #{$eff-primary-color};
+        --eff-bg-primary: #{$eff-primary-color};
+        --eff-bg-primary-light: #{color.scale($eff-primary-color, $lightness: 25%)};
+        --eff-bg-primary-fade: #{rgba($eff-primary-color, 15%)};
+        --eff-bg-primary-dark-1: #{color.scale($eff-primary-color, $lightness: -10%)};
+        --eff-bg-primary-dark-3: #{color.scale($eff-primary-color, $lightness: -30%)};
+        --eff-bg-primary-dark-4: #{color.scale($eff-primary-color, $lightness: -40%)};
+        --eff-border-primary-op-1: #{rgba($eff-primary-color, 10%)};
+        --eff-border-primary-op-5: #{rgba($eff-primary-color, 50%)};
+        --eff-fill-rad: #{$eff-fill-rad};
+        --eff-fill-rad-light: #{color.scale($eff-fill-rad, $lightness: 25%)};
+        --eff-fill-rad-dark: #{color.scale($eff-fill-rad, $lightness: -15%)};
+        --eff-fill-rad-bg: #{rgba($eff-fill-rad, 15%)};
+        --eff-fill-radk: #{$eff-fill-radk};
+        --eff-fill-radk-light: #{color.scale($eff-fill-radk, $lightness: 25%)};
+        --eff-fill-ele: #{$eff-fill-ele};
+        --eff-fill-ele-light: #{color.scale($eff-fill-ele, $lightness: 25%)};
+        --eff-fill-sar: #{$eff-fill-sar};
+        --eff-fill-sar-light: #{color.scale($eff-fill-sar, $lightness: 25%)};
+        --eff-fill-sar-dark: #{color.scale($eff-fill-sar, $lightness: -25%)};
+        --eff-fill-opt: #{$eff-fill-opt};
+        --eff-fill-opt-light: #{color.scale($eff-fill-opt, $lightness: 25%)};
+        --eff-fill-relay: #{$eff-fill-relay};
+        --eff-fill-relay-light: #{color.scale($eff-fill-relay, $lightness: 25%)};
+        --eff-card-border-color: #{$eff-card-border};
+        /************************效能评估图表颜色*************************/
+        --eff-chart-rad: #{$eff-chart-rad};
+        --eff-chart-rad-light: #{color.scale($eff-chart-rad, $lightness: 25%)};
+        --eff-chart-rad-fade: #{rgba($eff-chart-rad, 25%)};
+        --eff-chart-rad-dark: #{color.scale($eff-chart-rad, $lightness: -15%)};
+        --eff-chart-rad-bg: #{rgba($eff-chart-rad, 15%)};
+        --eff-chart-rad-border: #{rgba($eff-chart-rad, 40%)};
+        --eff-chart-radk: #{$eff-chart-radk};
+        --eff-chart-radk-light: #{color.scale($eff-chart-radk, $lightness: 25%)};
+        --eff-chart-ele: #{$eff-chart-ele};
+        --eff-chart-ele-light: #{color.scale($eff-chart-ele, $lightness: 25%)};
+        --eff-chart-sar: #{$eff-chart-sar};
+        --eff-chart-sar-light: #{color.scale($eff-chart-sar, $lightness: 25%)};
+        --eff-chart-sar-dark: #{color.scale($eff-chart-sar, $lightness: -25%)};
+        --eff-chart-opt: #{$eff-chart-opt};
+        --eff-chart-opt-light: #{color.scale($eff-chart-opt, $lightness: 25%)};
+        --eff-chart-relay: #{$eff-chart-relay};
+        --eff-chart-relay-light: #{color.scale($eff-chart-relay, $lightness: 25%)};
+        /************************用户主页颜色*************************/
+        --home-popover-bg-color: rgba(48, 58, 72, 0.9);
+        --home-grid-bg-color-lv-1: rgba(69, 84, 98, 0.47);
+        --home-grid-bg-color-lv-2: rgba(92, 111, 128, 0.47);
+        --home-spacer-header-border-color: #2C6A87;
+        --home-spacer-border-color: #4F6175;
+        --home-rect-bg-color-1: rgba(0, 135, 232, 1);
+        --home-rect-bg-color-2: rgba(31, 179, 90, 1);
+        --home-rect-bg-color-3: rgba(121, 79, 174, 1);
+        --home-rect-bg-color-4: rgba(198, 130, 64, 1);
+        --home-rect-bg-color-5: rgba(153, 158, 170, 1);
+        --home-success-color: #1BF8C3;
+        --home-KGC-icon-color: #69BEFB;
+        --home-SSC-alg-bg-color: rgba(130, 255, 147,0.47);
+        --home-PFMC-box-bg-color: rgba(50, 97, 140, 0.47);
+        --home-TAC-icon-green-color: #45ff1e;
+        --home-TAC-icon-red-color: #FF6060;
+        /************************智能对话右侧面板************************/
+        --chatmsg-bg-color: rgba(28, 35, 44, 0.90);
+        --chatmsg-panel-bg-color: rgb(50, 60, 72);
+        --chatmsg-select-bg-color: rgb(60, 79, 94);
+        --chatmsg-select-btn-bg-color: rgb(47, 108, 178);
+        /************************智能对话弹窗************************/
+        --chat-dialog-bg-color: rgba(28, 35, 44, 0.90);
+        --chat-dialog-title-bg-color: rgba(59, 77, 94, 0.32);
+        --chat-search-bg-color: rgba(29, 107, 89, 0.47);
+        --chat-search-border-color: #1AD8D8;
+        --chat-search-progress-out-bg-color: rgba(192, 213, 208, 0.47);
+        --chat-target-bg-color: rgba(104, 112, 120, 0.20);
+        --chat-status-bg-color: rgba(47, 108, 178, 0.69);
+        --chat-status-border-color: #26C4FF;
+        /********************* td预设间隔 *********************/
+        --td-gap-tiny: 2px;
+        --td-gap-mini: 4px;
+        --td-gap-small: 8px;
+        --td-gap-medium: 16px;
+        --td-gap-large: 32px;
+        --td-gap-huge: 64px;
+        --td-gap-10: 10px;
+        --td-gap-20: 20px;
+        // 模块浅灰背景
+        --td-module-gray-bg: rgba(38, 38, 38, 1);
+        // 文本line-height
+        --td-text-leading-7: 28px;
+        --td-primary-bg: #303540;
+        --td-color-primary-light: #329FF3;
+        --td-color-process-border: #262931;
+        --td-color-process-bg: #1C1E24;
+        --td-color-process-module: #262931;
+        // --td-color-process-module-light: #2F333B;
+        --td-color-process-module-hover: #2F333B;
+        --td-color-process-module-divider: #3B414E;
+        --td-color-process-module-item: #333843;
+        --td-color-process-module-item-light: #464D5B;
+        --td-color-active-task: #404754;
+        --td-color-danger: #E95151;
+        --td-color-header-divider: #232730;
+        --td-container-card-bg: #3B414E;
+        /********************* td预设间隔结束 *********************/
+    }
+    &.dark {
+        --el-bg-color-overlay: #3B414E;
+    }
+}

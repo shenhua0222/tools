@@ -1,0 +1,126 @@
+@use "sass:math";
+@use "sass:list";
+@use "sass:map";
+@use "element-plus/theme-chalk/src/common/var.scss" as *;
+@use "element-plus/theme-chalk/src/mixins/_var.scss" as *;
+@use "element-plus/theme-chalk/src/index.scss";
+
+@function joinVarN($list) {
+    $name: "-";
+    @each $item in $list {
+        @if $item != "" {
+            $name: $name + "-" + $item;
+        }
+    }
+    @return $name;
+}
+@mixin set-css-var-val($name, $value) {
+    #{joinVarN($name)}: #{$value};
+}
+/** 主色、辅色透明度 */
+@mixin set-css-color-rgba($type, $alpha) {
+    @include set-css-var-value(("color", $type, "opacity", $alpha), #{rgba(map.get($colors, $type, "base"), math.div($alpha, 10))});
+}
+/** 背景色透明度 */
+@mixin set-css-bg-rgba($type, $alpha) {
+    @include set-css-var-value(("bgcolor", $type, "opacity", $alpha), #{rgba(map.get($bg-color, $type), math.div($alpha, 10))});
+}
+
+//
+$property: margin, padding;
+$proName: (
+    "margin": "mg",
+    "padding": "pd",
+);
+$direction: "", left, right, top, bottom;
+$dirName: (
+    "": "",
+    "left": "l",
+    "right": "r",
+    "top": "t",
+    "bottom": "b",
+);
+@mixin pro($name) {
+    .#{$name} {
+        @content;
+    }
+}
+// 设置margin,padding基础样式
+@mixin propertyClass() {
+    @each $pro in $property {
+        @for $i from 0 through 9 {
+            @each $dir in $direction {
+                $name: map.get($proName, $pro) + map.get($dirName, $dir) + "-" + $i;
+                @include pro($name) {
+                    @if $dir == "" {
+                        #{$pro}: $i * 8px;
+                    } @else {
+                        #{$pro+'-'+$dir}: $i * 8px;
+                    }
+                }
+            }
+        }
+    }
+}
+// 遍历主色和辅助色，混合黑色生成颜色map
+@mixin darkTypes() {
+    $darks: 1,2,3,4,5,6,7,8,9;
+    @each $type in $types {
+        // 两个循环是为了排版好看
+        @each $i in $darks {
+            @include set-color-mix-level($type, $i, "dark", $color-black);
+        }
+        @each $i in $darks {
+            @include set-css-var-value(("color", $type, "dark", $i), map.get($colors, $type, "dark-#{$i}"));
+        }
+    }
+}
+// 遍历主色和辅助色，混合黑色和白色
+@mixin lightTypes() {
+    $lights: 1,2,3,4,5,6,7,8,9;
+    @each $type in $types {
+        // 两个循环是为了排版好看
+        @each $i in $lights {
+            @include set-color-mix-level($type, $i, "light", $color-white);
+        }
+        @each $i in $lights {
+            @include set-css-var-value(("color", $type, "light", $i), map.get($colors, $type, "light-#{$i}"));
+        }
+    }
+}
+// 遍历主色、辅助色、背景色，设置透明度
+@mixin opacityTypes() {
+    $opacities: 1, 2, 3, 4, 5, 6, 7, 8, 9;
+    @each $type in $types {
+        @each $i in $opacities {
+            @include set-css-color-rgba($type, $i);
+        }
+    }
+    @each $type in map.keys($bg-color) {
+        @each $i in $opacities {
+            @include set-css-bg-rgba($type, $i);
+        }
+    }
+}
+
+// 甘特图块的颜色
+@mixin ganttBlockColors($alpha: 1) {
+    @for $i from 1 to 11 {
+        $nameType: "";
+        @if $alpha != 1 {
+            $nameType: "dark";
+        }
+        @include set-css-var-val(("block", "color", $nameType, $i), hsl(math.floor(36 * $i), 100%, 50%, $alpha));
+    }
+}
+
+$windowWidth: 2560;
+@mixin fontSize($size) {
+    font-size: calc($size / $windowWidth * 100vw);
+}
+@mixin autoWidth($width) {
+    width: calc($width / $windowWidth * 100vw);
+}
+@mixin autoHeight($height) {
+    height: calc($height / $windowWidth * 100vw);
+}

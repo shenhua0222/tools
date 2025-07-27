@@ -1,0 +1,66 @@
+@use "sass:color";
+
+// globally theme consts
+
+// colors
+$color-black: #595a5d !default;
+$color-white: #fff !default;
+
+$color-primary: #566779 !default;
+$color-success: #40e193 !default;
+$color-warning: #ffc688 !default;
+$color-danger: #f44747 !default;
+$color-info: #909399 !default;
+$color-highlight: #f38231 !default;
+
+$color-text-primary: #303133 !default;
+$color-text-regular: #606266 !default;
+$color-text-secondary: #909399 !default;
+
+$color-text-placeholder: #c0c4cc !default;
+$color-text-link: $color-text-regular !default;
+
+$v-link-color: $color-text-link !default;
+$v-link-hover-color: #2b9dcd !default;
+
+// fonts
+$font-size-normal: 12px !default;
+$font-size-extra-large: 28px !default;
+$font-size-large: 18px !default;
+$font-size-medium: 16px !default;
+$font-size-base: 14px !default;
+$font-size-title: $font-size-base !default;
+
+// border
+$border-color-hover: $color-text-placeholder !default;
+$border-color-base: #e4e7ed !default;
+$border-color-table: #ebeff1 !default;
+$border-color-tint: color.scale($border-color-base, $lightness: 4%);
+$border-base: 1px solid $border-color-base !default;
+
+// background
+$background-color-base: #f5f7fa !default;
+$background-color-info: #f8fafd !default;
+
+// Disable base
+$disabled-fill-base: $background-color-base !default;
+$disabled-color-base: $color-text-placeholder !default;
+
+// button
+$button-primary-border-color: #344557 !default;
+$button-primary-font-color: $color-white !default;
+$button-primary-background-color: $color-primary !default;
+$button-default-border-color: $border-color-base !default;
+$button-default-background-color: $background-color-base !default;
+$button-hover-tint-percent: 20% !default;
+$button-active-shade-percent: 10% !default;
+
+// form
+$v-form-page-ctl-width: 300px !default;
+$v-form-page-ctl-gap-width: 6px !default;
+$v-form-item-gutter-size: 20px !default;
+
+$v-dialog-size-small: 460px !default;
+$v-dialog-size-normal: 640px !default;
+$v-dialog-size-large: 900px !default;
+$v-dialog-size-xlarge: 1000px !default;

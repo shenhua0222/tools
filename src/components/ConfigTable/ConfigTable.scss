@@ -1,0 +1,142 @@
+@use '@/styles/vars.scss' as *;
+
+$border: 1px solid #e4e7ed;
+
+.td-config-table-wrapper {
+  position: relative;
+//   max-width: 800px;
+  min-width: inherit;
+  padding-bottom: 1px;
+}
+
+.td-config-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: $border;
+
+  th,
+  td {
+    border: $border;
+    text-align: left;
+  }
+
+  th {
+    padding: 10px;
+    background: $background-color-base;
+    line-height: 1em;
+    font-weight: 400;
+    color: #909399;
+    border-right: 1px solid transparent;
+
+    &:last-child {
+      border-right: $border;
+    }
+  }
+
+  td {
+    padding: 4px 10px;
+    line-height: 26px;
+    min-width: 4em;
+    max-width: 300px;
+
+    .v-form--ctl {
+      width: 100%;
+    }
+
+    span.text {
+      overflow-wrap: break-word;
+    }
+
+    .el-form-item {
+      margin-bottom: 0;
+
+      .el-form-item__content {
+        margin-left: 0 !important;
+      }
+    }
+
+    .special-error.el-form-item--small.el-form-item .el-form-item__error {
+      right: 4px;
+      top: 0;
+      padding-top: 0;
+      left: initial;
+      line-height: 32px;
+    }
+  }
+
+  .col-actions {
+    width: 50px;
+
+    .el-button {
+      padding: 4px 0;
+    }
+  }
+}
+
+.td-config-table-top-add {
+  margin-bottom: 10px;
+}
+
+.td-config-table-row-add {
+  border: $border;
+  padding: 0 10px;
+}
+
+.v-config-table.el-table {
+  th {
+    padding: 0;
+    background: $background-color-base;
+    line-height: 1em;
+    font-weight: 400;
+    color: #909399;
+    border-right: 1px solid transparent;
+
+    &:last-child {
+      border-right: $border;
+    }
+
+    .cell {
+      padding: 10px;
+      line-height: 1em;
+    }
+  }
+
+  .v-config-table-action-btn {
+    padding: 0;
+  }
+
+  .v-config-table-adder-bottom {
+    padding: 0 10px;
+    .el-button {
+        padding: 0;
+    }
+  }
+
+  // td .cell {
+  //   overflow: initial;
+  // }
+
+  .cell .el-form-item {
+    margin-bottom: 0;
+
+    .el-form-item__content {
+      margin-left: 0;
+    }
+
+    .v-form--ctl {
+      width: 100%;
+    }
+
+    &.is-error .el-input__validateIcon {
+      color: $color-danger;
+    }
+  }
+
+  .el-table__row.invisible {
+    display: none;
+  }
+
+  .el-table__empty-block {
+    display: none;
+  }
+}
