@@ -25,7 +25,7 @@ watch(
     <el-card>
       <template #header>
         <div class="card-header">
-          <span>JSON 输入</span>
+          <span class="text-primary">JSON 输入</span>
         </div>
       </template>
       <el-input
