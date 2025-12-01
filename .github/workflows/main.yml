@@ -10,30 +10,30 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
-    environment: production # 推荐：使用环境配置来保护 Secrets 和控制部署
+
+    #environment: production # 推荐：使用环境配置来保护 Secrets 和控制部署
 
     steps:
       # 1. 检出代码
       - name: Checkout Repository
         uses: actions/checkout@v4
-        
+
       # 2. 设置 Node.js 环境
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # 推荐使用 LTS 版本
-          cache: 'npm' # 使用缓存加速依赖安装
-          
+          node-version: "20" # 推荐使用 LTS 版本
+          cache: "npm" # 使用缓存加速依赖安装
+
       # 3. 安装依赖
       - name: Install dependencies
         run: npm install
-        
+
       # 4. 构建项目
       # Vite 默认构建命令是 npm run build，默认输出目录是 'dist'
       - name: Build project (npm run build)
         run: npm run build
-        
+
       # 5. 部署：使用 rsync/scp 将构建产物传输到 ECS
       - name: Deploy via rsync to Aliyun ECS
         uses: easingthemes/ssh-deploy@v4.1.10 # 一个封装了 rsync 的部署 Action
@@ -42,14 +42,14 @@ jobs:
           SSH_HOST: ${{ secrets.ALIYUN_ECS_HOST }}
           SSH_USERNAME: ${{ secrets.ALIYUN_ECS_USER }}
           SSH_KEY: ${{ secrets.ALIYUN_ECS_SSH_KEY }}
-          
+
           # rsync 配置
           SOURCE: "dist/" # **重要：这是 Vite 构建生成的静态文件目录**
           TARGET: "/web/resume-flow" # **重要：这是您 ECS 上 Web 服务器（如 Nginx）的根目录**
-          
+
           # 可选：删除服务器上目标目录中不存在的文件（保持同步）
-          ARGS: "-avz --delete" 
-          
+          ARGS: "-avz --delete"
+
       # 6. (可选) 远程执行 Nginx 相关的清理或重启
       # 这一步通常用于清除 Nginx 缓存，确保用户访问的是最新文件
       - name: Execute remote commands (Clear Nginx Cache)
