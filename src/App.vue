@@ -1,11 +1,13 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
-   <RouterView />
+  <div class="app-container">
+    <RouterView />
+  </div>
 </template>
 
-<style scoped>
-
+<style scoped lang="scss">
+.app-container {
+  padding: 20px;
+}
 </style>
