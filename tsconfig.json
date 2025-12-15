@@ -10,6 +10,7 @@
     // "tsBuildInfoFile": "./node_modules/.cache/tsconfig.tsbuildinfo",
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
       "@src/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@utils/*": ["src/utils/*"],
