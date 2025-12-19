@@ -1,10 +1,19 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import svgLoader from "vite-svg-loader";
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
+import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [svgLoader(), vue()],
+  plugins: [
+    vue(),
+    createSvgIconsPlugin({
+      iconDirs: [path.resolve(process.cwd(), "src/icons")],
+      symbolId: "icon-[dir]-[name]",
+      inject: "body-last",
+      customDomId: "__svg__icons__dom__",
+    }),
+  ],
   resolve: {
     alias: {
       "@src": "/src",

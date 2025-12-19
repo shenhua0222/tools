@@ -10,8 +10,8 @@
       <h2>基础使用</h2>
       <div class="icon-grid">
         <div class="icon-item">
-          <SvgIcon name="home" size="32" color="#409EFF" />
-          <p>home</p>
+          <SvgIcon name="eye" size="32" color="#409EFF" />
+          <p>eye</p>
         </div>
         <div class="icon-item">
           <SvgIcon name="star" size="32" />

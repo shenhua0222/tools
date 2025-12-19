@@ -22,11 +22,17 @@ const iconStyle = computed(() => {
     color: props.color,
   };
 });
+
+const symbolId = computed(() => {
+  return `#icon-${props.name}`;
+});
 </script>
 
 <template>
   <span class="svg-icon" :style="iconStyle" :class="class">
-    <component :is="`svg-${name}`" />
+    <svg>
+      <use :xlink:href="symbolId" />
+    </svg>
   </span>
 </template>
 
@@ -39,7 +45,7 @@ const iconStyle = computed(() => {
   flex-shrink: 0;
 }
 
-.svg-icon :deep(svg) {
+.svg-icon svg {
   width: 100%;
   height: 100%;
   fill: currentColor;
